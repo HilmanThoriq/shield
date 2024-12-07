@@ -71,53 +71,60 @@
 
 /*** Navbar ***/
 
-nav.navbar{
+nav.navbar {
   background-color: var(--light);
 }
-nav.navbar a h2{
+
+nav.navbar a h2 {
   color: ;
   font-family: 'Poppins', sans-serif;
   font-size: 32px;
   font-weight: bold;
 
 }
-nav.navbar #navbarCollapse ul li{
+
+nav.navbar #navbarCollapse ul li {
   margin: 0px 15px 0px 0px;
 }
-nav.navbar #navbarCollapse ul li a{
+
+nav.navbar #navbarCollapse ul li a {
   color: var(--dark);
   font-family: 'Ubuntu', sans-serif;
   font: size 16px;
   font-weight: 500;
 }
-nav.navbar #navbarCollapse ul li a:active{
-  color: var(--primary);
-}
-nav.navbar #navbarCollapse ul li a:focus{
-  color: var(--primary);
-}
-nav.navbar #navbarCollapse ul li a:hover{
+
+nav.navbar #navbarCollapse ul li a:active {
   color: var(--primary);
 }
 
-  /* Toggler Icon */
-  .navbar-toggler,
-  .navbar-toggler:focus,
-  .navbar-toggler:active,
-  .navbar-toggler-icon:focus {
-      outline: none;
-      border: none !important;
-      box-shadow: none;
-  }
-  /* Toggler Icon End  */
+nav.navbar #navbarCollapse ul li a:focus {
+  color: var(--primary);
+}
+
+nav.navbar #navbarCollapse ul li a:hover {
+  color: var(--primary);
+}
+
+/* Toggler Icon */
+.navbar-toggler,
+.navbar-toggler:focus,
+.navbar-toggler:active,
+.navbar-toggler-icon:focus {
+  outline: none;
+  border: none !important;
+  box-shadow: none;
+}
+
+/* Toggler Icon End  */
 
 
 
 /*** Header ***/
 header {
-  background-image: url('../img/background.jpeg'); 
-  background-size: cover; 
-  background-position: center; 
+  background-image: url('../img/background.jpeg');
+  background-size: cover;
+  background-position: center;
   height: 100vh;
 }
 
@@ -135,7 +142,8 @@ header {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Overlay gelap */
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Overlay gelap */
   z-index: 1;
 }
 
@@ -150,10 +158,12 @@ header {
   color: #ffffff;
 }
 
-.jumbotron h4{
+.jumbotron h4 {
   font-size: 24px;
 }
-.jumbotron h4, .jumbotron h1 {
+
+.jumbotron h4,
+.jumbotron h1 {
   color: #ffffff;
 }
 
@@ -165,12 +175,14 @@ header {
 .jumbotron a.btn {
   font-size: 1.2rem;
   font-weight: 500;
-  
+
 }
 
 /*** Facts ***/
 .fact {
-  background-color: #D81324;
+  background-image: url('../img/home-cover.jpg');
+  background-size: cover;
+  background-position: center;
 }
 
 
@@ -187,17 +199,19 @@ header {
 .service .nav .nav-link.active h4 {
   color: #FFFFFF !important;
 }
-a.btn-connect{
+
+a.btn-connect {
   font-size: 12px;
 }
-.text-justify{
+
+.text-justify {
   text-align: justify;
 }
 
 
 /*** Booking ***/
 .booking {
-  background: linear-gradient(rgba(0, 0, 0, .7), rgba(0, 0, 0, .7)), url(../img/carousel-bg-2.jpg) center center no-repeat;
+  background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url(../img/home-cover.jpg) center center no-repeat;
   background-size: cover;
 }
 
@@ -251,7 +265,7 @@ a.btn-connect{
   justify-content: center;
 }
 
-p.star{
+p.star {
   color: var(--secondary);
 }
 
@@ -340,3 +354,210 @@ p.star{
   padding-right: 0;
   border-right: none;
 }
+
+.footer .footer-desc {
+  text-indent: 40px;
+}
+
+
+/* Style buat-aduan.html */
+.header-buataduan {
+  background-image: url('../img/home-cover.jpg');
+  background-color: rgba(0, 0, 0, 0) !important;
+  background-size: cover;
+  background-position: center;
+  max-height: 80vh;
+}
+
+.header-buataduan::before {
+  content: "";
+  position: relative;
+  top: 71;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Overlay gelap */
+  z-index: 1;
+}
+
+.header-buataduan .container {
+  position: relative;
+  z-index: 2;
+}
+
+
+.header-buataduan h6 {
+  margin-top: -80px;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.header-buataduan p {
+  font-size: 28px;
+  font-weight: 100 !important;
+}
+
+.header-buataduan h4,
+.header-buataduan h1 {
+  color: #ffffff;
+}
+
+.header-buataduan h1 {
+  font-weight: 700;
+  font-size: 24px;
+}
+.svg{
+  width: 100%;
+  margin-top: -880px;
+  position: relative;
+  z-index: 3;
+}
+
+/* Form Buataduan.html*/
+.card {
+  position: relative;
+  border: none;
+  margin-top: -250px;
+  z-index: 4;
+}
+
+.btn-check:checked+.btn-outline-danger {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-outline-danger {
+  border-color: #dc3545;
+  color: #dc3545;
+}
+
+.btn-outline-danger:hover {
+  background-color: #dc3545;
+  color: white;
+}
+
+.form-control,
+.form-select {
+  border: 1px solid #dee2e6;
+  padding: 0.75rem;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+.step-icon {
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  display: inline-block;
+}
+
+.process-steps{
+  margin-top: 80px !important;
+}
+
+.process-steps .col {
+  position: relative;
+}
+
+.process-steps .col:not(:last-child):after {
+  content: '';
+  position: absolute;
+  top: 25px;
+  left: 77%;
+  width: 60px;
+  height: 2px;
+  border-top: 2px dashed #dee2e6;
+  z-index: 0;
+}
+
+.upload-section .btn-outline-secondary {
+  color: #6c757d;
+  border-color: #6c757d;
+}
+
+.upload-section .btn-outline-secondary:hover {
+  color: #fff;
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+@media (max-width: 768px) {
+  .process-steps .col:not(:last-child):after {
+    display: none;
+  }
+
+  .submit-section {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn-group {
+    flex-direction: column;
+  }
+
+  .btn-group .btn {
+    border-radius: 0.25rem !important;
+    margin-bottom: 0.5rem;
+  }
+}
+
+/* Style buat-aduan.html End */
+
+/* Style riwayat-aduan.html Start */
+.header-riwayataduan {
+  background-image: url('../img/home-cover.jpg');
+  background-color: rgba(0, 0, 0, 0) !important;
+  background-size: cover;
+  background-position: center;
+  max-height: 60vh;
+}
+
+.header-riwayataduan::before {
+  content: "";
+  position: relative;
+  top: 71;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Overlay gelap */
+  z-index: 1;
+}
+
+.header-riwayataduan .container {
+  position: relative;
+  z-index: 2;
+}
+
+
+.header-riwayataduan h6 {
+  margin-top: -80px;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.header-riwayataduan p {
+  font-size: 28px;
+  font-weight: 100 !important;
+}
+
+.header-riwayataduan h4,
+.header-riwayataduan h1 {
+  color: #ffffff;
+}
+
+.header-riwayataduan h1 {
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.svg-long{
+  width: 100%;
+  margin-top: -250px;
+  position: relative;
+  z-index: 3;
+}
+/* Style riwayat-aduan.html End */

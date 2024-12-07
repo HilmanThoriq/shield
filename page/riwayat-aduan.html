@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- SEO Meta Tag -->
+  <meta charset="utf-8">
+  <title>SHIELD | Kota Surabaya</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="Hilman Thoriq" name="author">
+  <meta content="WebGIS SHIELD Kota Surabaya" name="keywords">
+  <meta content="SHIELD | WebGIS Sistem Informasi Pengaduan Kasus Kekerasan di Kota Surabaya" name="description">
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="SHIELD | Kota Surabaya">
+  <meta property="og:description" content="WebGIS SHIELD Sistem Informasi Pengaduan Kasus Kekerasan di Kota Surabaya">
+  <meta property="og:image" content="/src/img/icon-with-text.png">
+  <meta property="og:url" content="hilmanthoriq.github.io/shield">
+  <meta property="og:type" content="website">
+
+
+  <!-- Favicon -->
+  <link href="../src/img/icon.png" rel="icon">
+  <link href="../src/img/icon.png" rel="shortcut icon">
+
+  <!-- Google Web Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700&family=Ubuntu:wght@400;500&display=swap"
+    rel="stylesheet">
+
+  <!-- Icon Font Stylesheet -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Libraries Stylesheet -->
+  <link href="../src/lib/animate/animate.min.css" rel="stylesheet">
+  <link href="../src/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+  <!-- Customized Bootstrap Stylesheet -->
+  <link href="../src/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- External CSS -->
+  <link href="../src/css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- Spinner Start -->
+  <div id="spinner"
+    class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+    <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+  <!-- Spinner End -->
+
+
+  <!-- Navbar Start -->
+  <nav class="navbar navbar-expand-lg shadow-lg navbar-light fixed-top bg-light">
+    <div class="container">
+      <a href="index.html" class="navbar-brand align-items-center ps-3 ps-md-0">
+        <h2 class=""><img src="../src/img/icon.png" alt="icon" height="28" class="me-3"><span class="pt2">SHIELD</span>
+        </h2>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav ms-auto align-items-center p-4 p-lg-0">
+          <li class="nav-item"><a href="../index.html" class="nav-link">HOME</a></li>
+          <li class="nav-item"><a href="dashboard.html" class="nav-link">DASHBOARD</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdownMenu" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">WEBGIS</a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+              <li><a class="dropdown-item ms-2" href="webgis-sebaran.html">WEBGIS Sebaran Kasus Kekerasan</a></li>
+              <li><a class="dropdown-item ms-2" href="webgis-zona.html">WEBGIS Zona Rawan Kasus Kekerasan</a></li>
+              <li><a class="dropdown-item ms-2" href="webgis-jumlahkasus.html">WEBGIS Jumlah Kasus Kekerasan per
+                  Kecamatan</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a href="/page/buat-aduan.html" class="nav-link">BUAT ADUAN</a></li>
+          <li class="nav-item"><a href="/page/riwayat-aduan.html" class="nav-link">RIWAYAT</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- Navbar End -->
+
+
+  <!-- Jumbotron Start -->
+  <header class="jumbotron jumbotron-fluid header-riwayataduan text-white text-center">
+    <div class="container d-flex flex-column justify-content-center align-items-center h-100">
+      <h6 class="mb-3">Daftar Riwayat Laporan Kasus Kekerasan di Kota Surabaya Tahun 2024</h6>
+    </div>
+  </header>
+  <img src="/src/img/waves-long.svg" alt="waves" class="svg-long">
+  <!-- Jumbotron End -->
+
+  <!-- Main Content -->
+
+  <!-- Footer Start -->
+  <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
+    <div class="container py-5">
+      <div class="row g-5">
+        <div class="col-lg-4 col-md-6">
+          <h4 class="text-light mb-4">Tentang SHIELD</h4>
+          <p class="text-justify footer-desc">SHIELD (Spatial Harassment Incident Evaluation and Location Detection)
+            adalah sebuah sistem WebGIS yang dirancang untuk menerima dan menganalisis laporan kekerasan di Kota
+            Surabaya. Sistem ini memungkinkan korban atau saksi untuk melaporkan insiden kekerasan secara online dengan
+            cepat dan mudah</p>
+
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <h4 class="text-light mb-4">Alamat UPTD PPA</h4>
+          <p class="text-justify mb-2"><i class="fa fa-map-marker-alt me-3"></i>Jl. Nginden Permata No.1, Nginden
+            Jangkungan, Kec.
+            Sukolilo, Surabaya, Jawa Timur 60118</p>
+          <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>081133453033</p>
+          <p class="mb-2"><i class="fa fa-envelope me-3"></i>uptdppasbya@gmail.com</p>
+
+        </div>
+        <div class="col-lg-2 col-md-6 px-lg-0">
+          <h4 class="text-light mb-4">Jam Operasional</h4>
+          <h6 class="text-light">Senin - Jum'at:</h6>
+          <p class="mb-3">08.30 - 17-00 WIB</p>
+          <h6 class="text-light">Sabtu - Minggu:</h6>
+          <p class="mb-3">09.30 - 15-00 WIB</p>
+          <h6 class="text-light">Pengaduan Daring</h6>
+          <p class="mb-0">24 Jam</p>
+        </div>
+        <div class="col-lg-3 col-md-6 ps-lg-4">
+          <h4 class="text-light mb-4">Temukan Kami</h4>
+          <ul class="list-unstyled">
+            <li class="mb-2">
+              <p>
+                <a href="https://www.facebook.com" target="_blank" class="text-light btn-facebook">
+                  <i class="fab fa-facebook me-3"></i>Facebook
+                </a>
+              </p>
+            </li>
+            <p>
+              <li class="mb-2">
+                <a href="https://www.twitter.com" target="_blank" class="text-light btn-twitter">
+                  <i class="fab fa-whatsapp me-3"></i>Whatsapp
+                </a>
+              </li>
+            </p>
+            <p>
+              <li class="mb-2">
+                <a href="https://www.instagram.com" target="_blank" class="text-light btn-insta">
+                  <i class="fab fa-instagram me-3"></i> Instagram
+                </a>
+              </li>
+            </p>
+            <p>
+              <li class="mb-2">
+                <a href="https://www.youtube.com" target="_blank" class="text-light btn-youtube">
+                  <i class="fab fa-youtube me-3"></i>YouTube
+                </a>
+              </li>
+            </p>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="copyright  text-center pb-4">
+        &copy; <a class="" href="#">SHIELD </a>2024 , All Right Reserved.
+      </div>
+    </div>
+  </div>
+  <!-- Footer End -->
+
+
+  <!-- JavaScript Libraries -->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../src/lib/wow/wow.min.js"></script>
+  <script src="../src/lib/wow/wow.min.js"></script>
+  <script src="../src/lib/easing/easing.min.js"></script>
+  <script src="../src/lib/waypoints/waypoints.min.js"></script>
+  <script src="../src/lib/counterup/counterup.min.js"></script>
+  <script src="../src/lib/owlcarousel/owl.carousel.min.js"></script>
+  <script src="../src/lib/tempusdominus/js/moment.min.js"></script>
+  <script src="../src/lib/tempusdominus/js/moment-timezone.min.js"></script>
+  <script src="../src/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+  <script src="https://kit.fontawesome.com/02721a206a.js" crossorigin="anonymous"></script>
+
+
+  <!-- Template Javascript -->
+  <script src="../src/js/main.js"></script>
+</body>
+
+</html>
