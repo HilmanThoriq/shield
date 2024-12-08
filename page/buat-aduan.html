@@ -17,7 +17,6 @@
   <meta property="og:url" content="hilmanthoriq.github.io/shield">
   <meta property="og:type" content="website">
 
-
   <!-- Favicon -->
   <link href="../src/img/icon.png" rel="icon">
   <link href="../src/img/icon.png" rel="shortcut icon">
@@ -35,6 +34,9 @@
   <!-- Libraries Stylesheet -->
   <link href="../src/lib/animate/animate.min.css" rel="stylesheet">
   <link href="../src/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+  <!-- CDN SweetAlert -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <!-- Customized Bootstrap Stylesheet -->
   <link href="../src/css/bootstrap.min.css" rel="stylesheet">
@@ -59,7 +61,7 @@
   <!-- Navbar Start -->
   <nav class="navbar navbar-expand-lg shadow-lg navbar-light fixed-top bg-light">
     <div class="container">
-      <a href="index.html" class="navbar-brand align-items-center ps-3 ps-md-0">
+      <a href="../index.html" class="navbar-brand align-items-center ps-3 ps-md-0">
         <h2 class=""><img src="../src/img/icon.png" alt="icon" height="28" class="me-3"><span class="pt2">SHIELD</span>
         </h2>
       </a>
@@ -69,19 +71,19 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav ms-auto align-items-center p-4 p-lg-0">
           <li class="nav-item"><a href="../index.html" class="nav-link">HOME</a></li>
-          <li class="nav-item"><a href="dashboard.html" class="nav-link">DASHBOARD</a></li>
+          <li class="nav-item"><a href="../page/dashboard.html" class="nav-link">DASHBOARD</a></li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="dropdownMenu" role="button" data-bs-toggle="dropdown"
               aria-expanded="false">WEBGIS</a>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
-              <li><a class="dropdown-item ms-2" href="webgis-sebaran.html">WEBGIS Sebaran Kasus Kekerasan</a></li>
-              <li><a class="dropdown-item ms-2" href="webgis-zona.html">WEBGIS Zona Rawan Kasus Kekerasan</a></li>
-              <li><a class="dropdown-item ms-2" href="webgis-jumlahkasus.html">WEBGIS Jumlah Kasus Kekerasan per
+              <li><a class="dropdown-item ms-2" href="./webgis-sebaran.html">WEBGIS Sebaran Kasus Kekerasan</a></li>
+              <li><a class="dropdown-item ms-2" href="./webgis-zona.html">WEBGIS Zona Rawan Kasus Kekerasan</a></li>
+              <li><a class="dropdown-item ms-2" href="./webgis-jumlahkasus.html">WEBGIS Jumlah Kasus Kekerasan per
                   Kecamatan</a></li>
             </ul>
           </li>
-          <li class="nav-item"><a href="/page/buat-aduan.html" class="nav-link">BUAT ADUAN</a></li>
-          <li class="nav-item"><a href="/page/riwayat-aduan.html" class="nav-link">RIWAYAT</a></li>
+          <li class="nav-item"><a href="./buat-aduan.html" class="nav-link">BUAT ADUAN</a></li>
+          <li class="nav-item"><a href="./riwayat-aduan.html" class="nav-link">RIWAYAT</a></li>
         </ul>
       </div>
     </div>
@@ -96,7 +98,7 @@
       <p class="mb-4">Buat Laporan mengenai Kasus Kekerasan yang anda alami atau lihat</p>
     </div>
   </header>
-  <img src="/src/img/waves.svg" alt="waves" class="svg">
+  <img src="../src/img/waves.svg" alt="waves" class="svg">
   <!-- Jumbotron End -->
 
 
@@ -104,10 +106,10 @@
   <div class="container complaint-form-section py-5">
     <div class="container">
       <div class="row justify-content-center">
-        <div class="col-lg-7">
+        <div class="col-lg-8">
           <div class="card shadow-lg">
             <div class="card-body p-5">
-              <h2 class="text-center mb-5">Sampaikan Laporan Anda</h2>
+              <h2 class="text-center mb-5">Buat Laporan Anda</h2>
 
               <!-- Warning Message -->
               <div class="alert alert-light border mb-4">
@@ -116,13 +118,13 @@
               </div>
 
               <!-- Form Fields -->
-              <form>
+              <form action="input-data.php" method="POST" id="form-aduan">
                 <div class="mb-3">
-                  <input type="text" class="form-control" placeholder="Ketik Nama Pelapor *" required>
+                  <input type="text"  id="nama_pelapor" name="nama_pelapor" class="form-control" placeholder="Ketik Nama Pelapor *" required>
                 </div>
 
                 <div class="mb-3">
-                  <select class="form-select" required>
+                  <select class="form-select" id="jenis_kejadian" name="jenis_kejadian" required>
                     <option value="" selected disabled>Pilih jenis kekerasan yang anda laporkan *</option>
                     <!-- Add your category options here -->
                     <option value="Kekerasan Fisik">Kekerasan Fisik</option>
@@ -134,11 +136,11 @@
                 </div>
 
                 <div class="mb-3">
-                  <input type="date" class="form-control" required>
+                  <input type="date" class="form-control" id="tgl_kejadian" name="tgl_kejadian" required>
                 </div>
 
                 <div class="mb-3">
-                  <select class="form-select" required>
+                  <select class="form-select" id="kec_kejadian" name="kec_kejadian" required>
                     <option value="" selected disabled>Ketik Lokasi Kejadian (Kecamatan) *</option>
                     <!-- Add your location options here -->
                     <option value="Asemrowo">Asemrowo</option>
@@ -176,7 +178,7 @@
                 </div>
 
                 <div class="mb-3">
-                  <select class="form-select" required>
+                  <select class="form-select" id="desa_kejadian" name="desa_kejadian" required>
                     <option value="" selected disabled>Ketik Lokasi Kejadian (Desa) *</option>
                     <!-- Add your institution options here -->
                     <option value="Asemrowo">Asemrowo</option>
@@ -334,17 +336,19 @@
                     <option value="Wonokromo">Wonokromo</option>
                   </select>
                 </div>
-                
+
                 <div class="mb-3">
-                  <input type="text" class="form-control" placeholder="Ketik Koordinat Latitude (contoh: -7.792382) *" required>
+                  <input type="text" class="form-control" id="latitude" name="latitude" placeholder="Ketik Koordinat Latitude (contoh: -7.792382) *"
+                    required>
                 </div>
-                
+
                 <div class="mb-3">
-                  <input type="text" class="form-control" placeholder="Ketik Koordinat Longitude (contoh: 110.349343) *" required>
+                  <input type="text" class="form-control" id="longitude" name="longitude" placeholder="Ketik Koordinat Longitude (contoh: 110.349343) *"
+                    required>
                 </div>
-                
+
                 <div class="mb-3">
-                  <textarea class="form-control" rows="5" placeholder="Ketik Isi Laporan Anda (Opsional)"></textarea>
+                  <textarea class="form-control" rows="5" id="detail_aduan" name="detail_aduan" placeholder="Ketik Isi Laporan Anda (Opsional)"></textarea>
                 </div>
 
                 <!-- Submit Section -->
@@ -362,7 +366,7 @@
           <!-- Process Steps -->
           <div class="process-steps mt-5">
             <div class="row text-center g-4">
-              <h4 class="mb-3">Alur Pengaduan</h4>
+              <h2 class="mb-3">Alur Pengaduan</h2>
               <div class="col">
                 <div class="step-icon bg-danger text-white rounded-circle mb-3">
                   <i class="fas fa-pencil-alt"></i>
@@ -408,17 +412,16 @@
   <!-- Main Section End -->
 
 
-
   <!-- Footer Start -->
   <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
     <div class="container py-5">
       <div class="row g-5">
         <div class="col-lg-4 col-md-6">
-          <h4 class="text-light mb-4">Tentang SHIELD</h4>
-          <p class="text-justify footer-desc">SHIELD (Spatial Harassment Incident Evaluation and Location Detection)
-            adalah sebuah sistem WebGIS yang dirancang untuk menerima dan menganalisis laporan kekerasan di Kota
-            Surabaya. Sistem ini memungkinkan korban atau saksi untuk melaporkan insiden kekerasan secara online dengan
-            cepat dan mudah</p>
+          <h4 class="text-light mb-4">Tentang <span class="text-primary">SHIELD</span></h4>
+          <p class="text-justify footer-desc"><span class="text-primary">SHIELD (Spatial Harassment Incident Evaluation
+              and Location Detection) </span> adalah sebuah sistem WebGIS yang dirancang untuk menerima dan menganalisis
+            laporan kekerasan di Kota Surabaya. Sistem ini memungkinkan korban atau saksi untuk melaporkan insiden
+            kekerasan secara online dengan cepat dan mudah</p>
 
         </div>
         <div class="col-lg-3 col-md-6">
@@ -476,7 +479,7 @@
     </div>
     <div class="container">
       <div class="copyright  text-center pb-4">
-        &copy; <a class="" href="#">SHIELD </a>2024 , All Right Reserved.
+        &copy; <a class="text-primary" href="#">SHIELD </a>2024 , All Right Reserved.
       </div>
     </div>
   </div>
@@ -500,6 +503,61 @@
 
   <!-- Template Javascript -->
   <script src="../src/js/main.js"></script>
+
+  <script>
+    $(document).ready(function () {
+        $('#form-aduan').on('submit', function (e) {
+            e.preventDefault(); // Mencegah form melakukan submit biasa
+
+            // Ambil data dari form
+            var formData = $(this).serialize();
+
+            // Kirim data dengan AJAX
+            $.ajax({
+                url: 'input-data.php', // Endpoint PHP untuk memproses data
+                type: 'POST',
+                data: formData,
+                success: function (response) {
+                    if (response === 'success') {
+                        Swal.fire({
+                            title: 'Berhasil!',
+                            text: 'Laporan Pengaduan anda berhasil disampaikan!',
+                            icon: 'success',
+                            showCancelButton: true,
+                            confirmButtonText: 'Lihat Riwayat Aduan',
+                            cancelButtonText: 'OK'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = 'riwayat-aduan.html';
+                            } else {
+                                Swal.fire(
+                                    'Terima kasih',
+                                    'Silakan tunggu informasi lebih lanjut dari kami',
+                                    'info'
+                                );
+                            }
+                        });
+                    } else {
+                        Swal.fire({
+                            title: 'Gagal!',
+                            text: 'Terjadi kesalahan saat menyimpan data.',
+                            icon: 'error',
+                            confirmButtonText: 'OK'
+                        });
+                    }
+                },
+                error: function () {
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'Gagal terhubung ke server.',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
+                }
+            });
+        });
+    });
+</script>
 </body>
 
 </html>
