@@ -1,6 +1,6 @@
 # SHIELD | WebGIS Zona Rawan Kasus Kekerasan di Kota Surabaya
 
-![SHIELD Logo](src/img/icon-with-text.png)
+<img src="src/img/icon-with-text.png" alt="SHIELD Logo" width="200" />
 
 ## Apa itu SHIELD?
 
