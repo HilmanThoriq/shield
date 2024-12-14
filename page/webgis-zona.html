@@ -247,17 +247,7 @@
                 fillColor: 'red',
                 fillOpacity: 0.3,
                 weight: 1
-            }).addTo(map).bindTooltip("Tanggal Kejadian: " + feature.properties.tgl_kejadian + "<br>Jenis Kekerasan: " + feature.properties.jenis_kekerasan).addTo(map);
-
-            // Detail Titik
-            // L.circleMarker(latlng, {
-            //     radius: 5, // Ukuran titik
-            //     color: 'red',
-            //     fillColor: 'red',
-            //     fillOpacity: 1,
-            //     weight: 1
-            // }).addTo(map);
-
+            }).addTo(map).bindTooltip("<b>Jenis Kekerasan yang sering terjadi : </b>" + feature.properties.jenis_kekerasan).addTo(map);
         
         });
 

@@ -1,30 +1,58 @@
-# SHIELD | WebGIS Zona Rawan Kasus Kekerasan di Kota Surabaya
-
 <img src="src/img/icon-with-text.png" alt="SHIELD Logo" width="200" />
+
+# SHIELD | Spatial Harrasment Incident Evaluation and Location Detection
+
 
 ## Apa itu SHIELD?
 
-SHIELD adalah sebuah aplikasi WebGIS (Web Geographic Information System) yang dirancang untuk memberikan informasi mengenai zona rawan kasus kekerasan di Kota Surabaya. Dengan menggunakan teknologi pemetaan interaktif, SHIELD memungkinkan pengguna untuk mengakses data dan informasi terkait kasus kekerasan secara real-time, sehingga dapat meningkatkan kesadaran dan keamanan masyarakat.
+SHIELD (Spatial Harrasment Incident Evaluation and Location Detection) adalah sebuah sistem informasi geografis berbasis web yang dirancang khusus untuk Kota Surabaya. Sistem ini berfungsi sebagai platform pelaporan dan pemantauan kasus kekerasan. Melalui SHIELD, masyarakat dapat melaporkan kejadian kekerasan secara online dan langsung melihat visualisasi data kasus pada peta interaktif. Selain itu, SHIELD juga menyediakan berbagai infografis yang menyajikan data kasus secara lebih mendalam, sehingga dapat membantu dalam menganalisis tren dan pola kekerasan yang terjadi di kota. Dengan adanya SHIELD, diharapkan penanganan kasus kekerasan di Surabaya dapat menjadi lebih efektif dan efisien.
+
 
 ## Latar Belakang
 
-Kota Surabaya, sebagai salah satu kota besar di Indonesia, menghadapi berbagai tantangan terkait keamanan dan ketertiban. Data mengenai kasus kekerasan sangat penting untuk dipahami oleh masyarakat dan pihak berwenang. SHIELD hadir sebagai solusi untuk memvisualisasikan data tersebut dalam bentuk peta, sehingga pengguna dapat dengan mudah mengidentifikasi area yang berisiko tinggi dan mengambil langkah-langkah pencegahan yang diperlukan.
+Surabaya, sebagai kota metropolitan yang dinamis, sayangnya juga menjadi sorotan atas tingginya angka kasus kekerasan. Data tahun 2024 menunjukkan peningkatan signifikan dalam kasus kekerasan, terutama yang berkaitan dengan kekerasan dalam rumah tangga, pelecehan seksual, dan perundungan. Faktor-faktor seperti urbanisasi yang pesat, ketimpangan sosial, dan kurangnya akses terhadap pendidikan serta layanan kesehatan mental menjadi pemicu utama masalah ini. Dampak dari kekerasan tidak hanya bersifat fisik, tetapi juga memicu trauma psikologis yang berkepanjangan bagi korban. Upaya pencegahan yang telah dilakukan sebelumnya, seperti sosialisasi dan kampanye, perlu ditingkatkan dan diintegrasikan dengan upaya penanganan kasus yang lebih efektif. SHIELD diharapkan dapat menjadi solusi inovatif dalam mengatasi permasalahan ini dengan menyediakan platform pelaporan yang mudah diakses, analisis data yang komprehensif, serta visualisasi yang interaktif, sehingga dapat membantu mengidentifikasi pola kekerasan, merancang intervensi yang tepat, dan meningkatkan kesadaran masyarakat akan pentingnya menciptakan lingkungan yang aman dan inklusif.
 
-## Fitur yang Tersedia
-
-- **Peta Interaktif**: Menampilkan peta Kota Surabaya dengan overlay data kasus kekerasan.
-- **Zona Rawan**: Menunjukkan area dengan tingkat kekerasan yang tinggi, dilengkapi dengan radius yang menunjukkan jangkauan pengaruh.
-- **Informasi Detail**: Tooltip yang menampilkan informasi detail mengenai setiap kasus, termasuk tanggal kejadian dan jenis kekerasan.
-- **Pencarian Lokasi**: Fitur pencarian untuk memudahkan pengguna menemukan lokasi tertentu di peta.
-- **Layer Kontrol**: Memungkinkan pengguna untuk memilih layer peta yang ingin ditampilkan, seperti batas administrasi dan lokasi kasus.
-- **Print dan Ekspor**: Fitur untuk mencetak peta atau mengekspor data untuk analisis lebih lanjut.
-- **Pengaduan Kasus**: Pengguna dapat melakukan pengaduan kasus kekerasan melalui formulir yang disediakan.
-- **Tampilkan Data Pengaduan**: Menampilkan data pengaduan kasus dalam bentuk tabel dan peta, memungkinkan pengguna untuk melihat dan mengelola pengaduan yang telah diajukan.
-- **CRUD (Create, Read, Update, Delete)**: Fitur untuk membuat, membaca, memperbarui, dan menghapus data pengaduan kasus.
 
 ## Teknologi yang Digunakan
 
-- **Leaflet**: Library JavaScript untuk membuat peta interaktif.
-- **GeoServer**: Server untuk mengelola dan menyajikan data geospasial.
-- **MySQL**: Database untuk menyimpan data kasus kekerasan.
-- **HTML/CSS/JavaScript**: Teknologi web standar untuk membangun antarmuka pengguna.
+### Bahasa
+* **HTML :** Struktur dasar halaman web
+* **CSS :** Gaya dan tampilan halaman web
+* **JavaScript :** Interaktivitas dan manipulasi DOM
+* **PHP :** Bahasa server-side untuk mengelola database dan logika aplikasi
+
+### Library
+* **Leaflet.js :** Pustaka JavaScript yang kuat untuk membuat peta interaktif.
+* **Bootstrap :** Kerangka kerja front-end untuk membangun antarmuka web yang responsif dan mengutamakan seluler.
+* **Highcharts.js :** Pustaka grafik untuk membuat grafik dan bagan yang interaktif dan menarik secara visual.
+* **SweetAlert2 :** Perpustakaan modern untuk membuat peringatan dan pemberitahuan yang indah, responsif, dan dapat disesuaikan.
+* **Moment.js :** Pustaka JavaScript untuk memanipulasi dan memformat tanggal dan waktu.
+
+### Icons dan Font
+* **Font Awesome :** 
+* **Ikon Bootstrap :** 
+* **Google Fonts API :**
+
+### Database 
+* **Geoserver :** 
+* **MySQL :** 
+
+### Plugin Leaflet
+* **Leaflet Icon Pulse :** Menambahkan ikon berdenyut ke peta untuk menyoroti lokasi tertentu.
+* **Pencarian Leaflet :** Memungkinkan pencarian lokasi dan penanda pada peta.
+* **Luas Default Leaflet :** Mengatur tingkat zoom awal dan koordinat tengah peta.
+* **Leaflet Browser Print :** Memungkinkan pengguna mencetak tampilan peta saat ini dengan mudah.
+* **Penggaris Leaflet :** Memungkinkan pengukuran jarak dan area pada peta.
+
+
+## Fitur SHIELD
+- **Landing Page :** Halaman Awal yang menarik dan inovatif untuk menyambut pengguna.
+![]()
+- **Dashboard :** Infografis visualisasi data terkait data statistik kasus kekerasan.
+![]()
+- **WebGIS :** Peta interaktif untuk visualisasi data geografis dan analisis spasial terkait kasus kekerasan.
+![]()
+- **Buat Aduan :** Formulir online untuk melaporkan kejadian kasus kekerasan saat melihat atau mengalami.
+![]()
+- **Riwayat :** Informasi berupa tabel dan peta mengenai riwayat laporan yang dilaporkan pengguna melalui website.
+![]()
