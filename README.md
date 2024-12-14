@@ -29,20 +29,20 @@ Surabaya, sebagai kota metropolitan yang dinamis, sayangnya juga menjadi sorotan
 * **Moment.js :** Pustaka JavaScript untuk memanipulasi dan memformat tanggal dan waktu.
 
 ### Icons dan Font
-* **Font Awesome :** 
-* **Ikon Bootstrap :** 
-* **Google Fonts API :**
+* **Font Awesome** 
+* **Ikon Bootstrap** 
+* **Google Fonts API**
 
 ### Database 
-* **Geoserver :** 
-* **MySQL :** 
+* **Geoserver** 
+* **MySQL** 
 
 ### Plugin Leaflet
-* **Leaflet Icon Pulse :** 
-* **Pencarian Leaflet :** 
-* **Luas Default Leaflet :** 
-* **Leaflet Browser Print :** 
-* **Penggaris Leaflet :** 
+* **Leaflet Icon Pulse** 
+* **Pencarian Leaflet** 
+* **Luas Default Leaflet** 
+* **Leaflet Browser Print** 
+* **Penggaris Leaflet** 
 
 
 ## Sumber Data 
@@ -54,18 +54,21 @@ Surabaya, sebagai kota metropolitan yang dinamis, sayangnya juga menjadi sorotan
 
 ## Fitur SHIELD
 - **Landing Page :** Halaman Awal yang menarik dan inovatif untuk menyambut pengguna.
-![Landing Page](src/img/images-readme/shield_landingpage.jpeg)
+<img src="src/img/images-readme/shield_landing-page.jpeg" alt="Landing Page" width="600"/>
+
 - **Dashboard :** Infografis visualisasi data terkait data statistik kasus kekerasan.
-![Dashboard](src/img/images-readme/shield_dashboard.jpeg)
+<img src="src/img/images-readme/shield_dashboard.jpeg" alt="Landing Page" width="600"/>
+
 - **WebGIS :** Peta interaktif untuk visualisasi data geografis dan analisis spasial terkait kasus kekerasan.
 
 <div style="display: flex; justify-content: center;">
-  <img src="src/img/images-readme/shield_webgis-sebarankasus.png" alt="WebGIS Sebaran Kasus Kekerasan" width="300"/>
-  <img src="src/img/images-readme/shield_webgis-zonarawankekerasan.png" alt="WebGIS Zona Rawan Kasus Kekerasan" width="300"/>
-  <img src="src/img/images-readme/shield_webgis-kasusbykec.png" alt="WebGIS Jumlah Kasus Kekerasan per Kecamatan" width="300"/>
+  <img src="src/img/images-readme/shield_webgis-sebarankasus.png" alt="WebGIS Sebaran Kasus Kekerasan" width="250"/>
+  <img src="src/img/images-readme/shield_webgis-zonarawankekerasan.png" alt="WebGIS Zona Rawan Kasus Kekerasan" width="250"/>
+  <img src="src/img/images-readme/shield_webgis-kasusbykec.png" alt="WebGIS Jumlah Kasus Kekerasan per Kecamatan" width="250"/>
 </div>
 
 - **Buat Aduan :** Formulir online untuk melaporkan kejadian kasus kekerasan saat melihat atau mengalami.
-![Buat Formulir](src/img/images-readme/shield_buat-aduan.jpeg)
+<img src="src/img/images-readme/shield_buat-aduan.jpeg" alt="Buat Aduan" width="600"/>
+
 - **Riwayat :** Informasi berupa tabel dan peta mengenai riwayat laporan yang dilaporkan pengguna melalui website.
-![Riwayat Aduan](src/img/images-readme/shield_riwayat-aduan.jpeg)
+<img src="src/img/images-readme/shield_riwayat-aduan.jpeg" alt="Riwayat Aduan" width="600"/>
