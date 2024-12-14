@@ -59,10 +59,10 @@ Surabaya, sebagai kota metropolitan yang dinamis, sayangnya juga menjadi sorotan
 ![Dashboard](src/img/images-readme/shield_dashboard.jpeg)
 - **WebGIS :** Peta interaktif untuk visualisasi data geografis dan analisis spasial terkait kasus kekerasan.
 
-<div style="display: flex; justify-content: space-around;">
-  <img src="src/img/images-readme/shield_webgis-sebarankasus.png" alt="WebGIS Sebaran Kasus Kekerasan" width="200"/>
-  <img src="src/img/images-readme/shield_webgis-zonarawankekerasan.png" alt="WebGIS Zona Rawan Kasus Kekerasan" width="200"/>
-  <img src="src/img/images-readme/shield_webgis-kasusbykec.png" alt="WebGIS Jumlah Kasus Kekerasan per Kecamatan" width="200"/>
+<div style="display: flex; justify-content: center;">
+  <img src="src/img/images-readme/shield_webgis-sebarankasus.png" alt="WebGIS Sebaran Kasus Kekerasan" width="300"/>
+  <img src="src/img/images-readme/shield_webgis-zonarawankekerasan.png" alt="WebGIS Zona Rawan Kasus Kekerasan" width="300"/>
+  <img src="src/img/images-readme/shield_webgis-kasusbykec.png" alt="WebGIS Jumlah Kasus Kekerasan per Kecamatan" width="300"/>
 </div>
 
 - **Buat Aduan :** Formulir online untuk melaporkan kejadian kasus kekerasan saat melihat atau mengalami.
