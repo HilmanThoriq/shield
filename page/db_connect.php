@@ -1,8 +1,8 @@
 <?php
-$host = "localhost"; // Nama host, biasanya localhost
-$username = "root"; // Username MySQL
-$password = ""; // Password MySQL
-$dbname = "shield_db"; // Nama database Anda
+$host = "localhost"; 
+$username = "root"; 
+$password = ""; 
+$dbname = "shield_db";
 
 // Membuat koneksi
 $conn = new mysqli($host, $username, $password, $dbname);

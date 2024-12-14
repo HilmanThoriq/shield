@@ -1,6 +1,5 @@
 <?php
 include 'db_connect.php';
-header('Content-Type: application/json');
 
 $sql = "SELECT * FROM data_aduan ORDER BY id_laporan ASC";
 $result = $conn->query($sql);

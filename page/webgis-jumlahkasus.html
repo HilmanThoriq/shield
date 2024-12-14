@@ -37,13 +37,47 @@
   <link href="../src/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
   <!-- Leaflet -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+  <!-- Plugin -->
+  <link rel="stylesheet" href="../src/lib/leaflet.draw-develop/src/leaflet.draw.css">
+  <link rel="stylesheet" href="../src/lib/leaflet.measurecontrol-master/leaflet.measurecontrol.css">
+  <link rel="stylesheet" href="../src/lib/leaflet-search-master/dist/leaflet-search.min.css">
+  <link rel="stylesheet" href="../src/lib/leaflet.defaultextent-master/dist/leaflet.defaultextent.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/gokertanrisever/leaflet-ruler@master/src/leaflet-ruler.css"
+    integrity="sha384-P9DABSdtEY/XDbEInD3q+PlL+BjqPCXGcF8EkhtKSfSTr/dS5PBKa9+/PMkW2xsY" crossorigin="anonymous" />
 
   <!-- Customized Bootstrap Stylesheet -->
   <link href="../src/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- External CSS -->
   <link href="../src/css/style.css" rel="stylesheet">
+
+  <!-- Internal CSS -->
+  <style>
+    .info-title {
+      padding: 6px 8px;
+      font: 14px/16px Arial, Helvetica, sans-serif;
+      background: white;
+      background: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      border-radius: 5px;
+    }
+
+    .info-title h4 {
+      margin: 0;
+      padding: 5px;
+      color: #D81324;
+    }
+
+    .info-title i {
+      width: 20px;
+      height: 20px;
+      display: inline-block;
+      margin-right: 5px;
+    }
+  </style>
 
 </head>
 
@@ -115,6 +149,15 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
+  <!-- Leaflet Plugin -->
+  <script src="../src/lib/leaflet.browser.print-master/dist/leaflet.browser.print.js"></script>
+  <script src="../src/lib/leaflet.browser.print-master/dist/leaflet.browser.print.min.js"></script>
+  <script src="../src/lib/leaflet-search-master/dist/leaflet-search.min.js"></script>
+  <script src="../src/lib/leaflet.defaultextent-master/dist/leaflet.defaultextent.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/gokertanrisever/leaflet-ruler@master/src/leaflet-ruler.js"
+    integrity="sha384-8SqKZR7V8uOetpjjbcNJHvwuHpb074WS0UXjCLhzfJUqYn3B/uWx1WVv5mwRp1mV"
+    crossorigin="anonymous"></script>
+
   <!-- Template Javascript -->
   <script src="../src/js/main.js"></script>
 
@@ -132,8 +175,8 @@
     });
 
     // Add to HTML
-    // googleStreets.addTo(map);
-    osm.addTo(map);
+    googleStreets.addTo(map);
+    // osm.addTo(map);
 
     // Watermark
     L.Control.Watermark = L.Control.extend({
@@ -157,15 +200,195 @@
     map.getPane('paneBatasAdmin').style.zIndex = 201;
 
     var batasAdmin = L.tileLayer.wms(geoserver_url, {
-      layers: 'shield-server:LayerDesaSurabaya',
+      layers: 'shield-server:BatasAdminKecamatanKotaSurabaya',
       format: 'image/png',
       transparent: true,
-      attribution: "Batas Administrasi Desa",
+      attribution: "Batas Administrasi Kecamatan",
       pane: "paneBatasAdmin",
-      opacity: 0.20
+      opacity: 0.6
     });
 
-    batasAdmin.addTo(map);
+    // Ambil data dari GeoServer menggunakan WFS
+    var geoserver_wfs_url = 'http://localhost:8080/geoserver/wfs';
+
+    // Buat parameter WFS request
+    var parameters = {
+      service: 'WFS',
+      version: '1.0.0',
+      request: 'GetFeature',
+      typeName: 'shield-server:BatasAdminKecamatanKotaSurabaya',
+      outputFormat: 'application/json',
+      srsName: 'EPSG:4326'
+    };
+
+    // Gabungkan URL dan parameter
+    var url = geoserver_wfs_url + L.Util.getParamString(parameters);
+
+    // Fetch data menggunakan AJAX
+    $.ajax({
+      url: url,
+      dataType: 'json',
+      success: function (data) {
+        // Buat layer GeoJSON dengan style tetap
+        var batasAdminLayer = L.geoJSON(data, {
+          style: function (feature) {
+            // Gunakan warna dari properti yang ada di GeoServer
+            return {
+              color: feature.properties.stroke || '#bbbbbb', // Warna border
+              weight: 0.5,
+              opacity: 1,
+              fillOpacity: 0
+            };
+          },
+          onEachFeature: function (feature, layer) {
+            // Buat konten tooltip
+            var tooltipContent = `<strong>Kecamatan ${feature.properties.WADMKC}</strong><br>
+                                    Jumlah Kasus: ${feature.properties.JML_KASUS}`;
+
+            // Tambahkan tooltip tanpa mengubah style
+            layer.bindTooltip(tooltipContent, {
+              direction: 'top',
+              sticky: true
+            });
+
+            // Nonaktifkan highlighting saat hover
+            layer.off({
+              mouseover: null,
+              mouseout: null
+            });
+          },
+          interactive: true // Tetap bisa berinteraksi untuk tooltip
+        });
+
+        // Tambahkan layer ke peta
+        batasAdminLayer.addTo(map);
+      },
+      error: function (xhr, status, error) {
+        console.error('Error fetching data:', error);
+      }
+    });
+
+    // Legenda
+    function createLegend() {
+      var legend = L.control({ position: 'bottomright' });
+
+      legend.onAdd = function (map) {
+        var div = L.DomUtil.create('div', 'info-title');
+        div.innerHTML = '<h5>Jumlah Kasus</h5>';
+
+        // Define the color scale and corresponding labels
+        var colors = [
+          { label: '7', color: '#f9d5d3' },
+          { label: '8', color: '#f4b6b0' },
+          { label: '9', color: '#f09f8e' },
+          { label: '10', color: '#ec7f6c' },
+          { label: '11', color: '#e95f4a' },
+          { label: '12', color: '#e03f28' },
+          { label: '13', color: '#d81f06' },
+          { label: '14', color: '#c70000' },
+          { label: '15', color: '#b60000' },
+          { label: '17', color: '#940000' },
+          { label: '18', color: '#800000' },
+        ];
+
+        // Add each color and label to the legend
+        colors.forEach(function (item) {
+          div.innerHTML += '<i style="background:' + item.color + '"></i> ' + item.label + '<br>';
+        });
+
+        return div;
+      };
+
+      legend.addTo(map);
+    }
+
+    createLegend();
+
+
+    // Judul
+    var info = L.control();
+
+    info.onAdd = function (map) {
+      this._div = L.DomUtil.create('div', 'info-title');
+      this.update();
+      return this._div;
+    };
+
+    info.update = function (props) {
+      this._div.innerHTML = '<h4>Peta Jumlah Kasus Kekerasan di Kota<br>Surabaya Tahun 2024</h4>';
+    };
+
+    info.addTo(map);
+
+
+    // Plugin 
+
+    // Layer Control
+    var baseMaps = {
+      "OpenStreetMap": osm,
+      "Google Street": googleStreets
+    };
+
+    var overlayMaps = {
+      "Batas Admin": batasAdmin,
+    };
+
+    L.control.layers(baseMaps, overlayMaps).addTo(map);
+
+    // Search Control
+    var searchControl = new L.Control.Search({
+      layer: batasAdmin,
+      propertyName: 'NAMOBJ',
+      marker: false,
+      moveToLocation: function (latlng, title, map) {
+        console.log("Found location:", title);
+        map.setView(latlng, 14);
+      },
+      autoComplete: true,
+      autoCompleteDelay: 250
+    });
+    map.addControl(searchControl);
+
+    // Default Extent Control
+    L.control.defaultExtent().addTo(map);
+
+    // Print
+    var options = {
+      title: "Print Map",
+      documentTitle: "Map",
+      position: 'topleft',
+      closePopupsOnPrint: true,
+      printModes: ["Portrait", "Landscape", "Custom"]
+    };
+
+    var browserControl = L.control.browserPrint(options).addTo(map);
+
+    // Measure 
+    var options = {
+      position: 'topleft',
+      circleMarker: {
+        color: 'red',
+        radius: 2
+      },
+      lineStyle: {
+        color: 'red',
+        dashArray: '1,6'
+      },
+      lengthUnit: {
+        display: 'km',
+        decimal: 2,
+        factor: null,
+        label: 'Distance:'
+      },
+      angleUnit: {
+        display: '&deg;',
+        decimal: 2,
+        factor: null,
+        label: 'Bearing:'
+      }
+    };
+    L.control.ruler(options).addTo(map);
+
 
   </script>
 

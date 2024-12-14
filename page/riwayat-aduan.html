@@ -39,6 +39,17 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 
+  <!-- Icon Markers -->
+  <link rel="stylesheet" href="../src/css/leaflet.awesome-markers.css">
+
+  <!-- Plugin -->
+  <link rel="stylesheet" href="../src/lib/leaflet.draw-develop/src/leaflet.draw.css">
+  <link rel="stylesheet" href="../src/lib/leaflet.measurecontrol-master/leaflet.measurecontrol.css">
+  <link rel="stylesheet" href="../src/lib/leaflet-search-master/dist/leaflet-search.min.css">
+  <link rel="stylesheet" href="../src/lib/leaflet.defaultextent-master/dist/leaflet.defaultextent.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/gokertanrisever/leaflet-ruler@master/src/leaflet-ruler.css"
+    integrity="sha384-P9DABSdtEY/XDbEInD3q+PlL+BjqPCXGcF8EkhtKSfSTr/dS5PBKa9+/PMkW2xsY" crossorigin="anonymous" />
+
   <!-- CDN SweetAlert -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -47,6 +58,24 @@
 
   <!-- External CSS -->
   <link href="../src/css/style.css" rel="stylesheet">
+
+  <!-- Internal CSS -->
+  <style>
+    .info-title {
+      padding: 6px 8px;
+      font: 14px/16px Arial, Helvetica, sans-serif;
+      background: white;
+      background: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      border-radius: 5px;
+    }
+
+    .info-title h5 {
+      margin: 0;
+      padding: 5px;
+      color: #D81324;
+    }
+  </style>
 
 </head>
 
@@ -117,7 +146,7 @@
               <table class="table table-bordered table-hover table-striped bg-white table-transparent">
                 <thead class="table-primary text-center">
                   <tr>
-                    <th>No</th>
+                    <th>Id Laporan</th>
                     <th>Nama Pelapor</th>
                     <th>Jenis Kekerasan</th>
                     <th>Tanggal Kejadian</th>
@@ -136,6 +165,7 @@
             </div>
             <!-- Map Section Start -->
             <div id="map" class="map-riwayataduan"></div>
+
             <!-- Map Section End -->
           </div>
         </div>
@@ -221,6 +251,268 @@
   </div>
   <!-- Footer End -->
 
+  <!-- Modal for Edit data Start -->
+  <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editModalLabel">Edit Data Laporan</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="editForm" action="update-data.php" method="POST">
+            <input type="hidden" id="edit_id_laporan" name="id_laporan">
+
+            <div class="mb-3">
+              <input type="text" id="edit_nama_pelapor" name="nama_pelapor" class="form-control"
+                placeholder="Ketik Nama Pelapor *" required>
+            </div>
+
+            <div class="mb-3">
+              <select class="form-select" id="edit_jenis_kekerasan" name="jenis_kekerasan" required>
+                <option value="" selected disabled>Pilih jenis kekerasan yang anda laporkan *</option>
+                <option value="Kekerasan Fisik">Kekerasan Fisik</option>
+                <option value="Kekerasan Psikis">Kekerasan Psikis</option>
+                <option value="Kekerasan Seksual">Kekerasan Seksual</option>
+                <option value="Perundungan">Perundungan</option>
+                <option value="Kekerasan Lainnya">Kekerasan Lainnya</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <input type="date" class="form-control" id="edit_tgl_kejadian" name="tgl_kejadian" required>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <select class="form-select" id="edit_kecamatan" name="kecamatan_kejadian" required>
+                  <option value="" selected disabled>Ketik Lokasi Kejadian (Kecamatan) *</option>
+                  <option value="Asemrowo">Asemrowo</option>
+                  <option value="Benowo">Benowo</option>
+                  <option value="Bubutan">Bubutan</option>
+                  <option value="Bulak">Bulak</option>
+                  <option value="Dukuh Pakis">Dukuh Pakis</option>
+                  <option value="Gayungan">Gayungan</option>
+                  <option value="Genteng">Genteng</option>
+                  <option value="Gubeng">Gubeng</option>
+                  <option value="Gunung Anyar">Gunung Anyar</option>
+                  <option value="Jambangan">Jambangan</option>
+                  <option value="Karang Pilang">Karang Pilang</option>
+                  <option value="Kenjeran">Kenjeran</option>
+                  <option value="Krembangan">Krembangan</option>
+                  <option value="Lakarsantri">Lakarsantri</option>
+                  <option value="Mulyorejo">Mulyorejo</option>
+                  <option value="Pabean Cantian">Pabean Cantian</option>
+                  <option value="Pakal">Pakal</option>
+                  <option value="Rungkut">Rungkut</option>
+                  <option value="Sambikerep">Sambikerep</option>
+                  <option value="Sawahan">Sawahan</option>
+                  <option value="Semampir">Semampir</option>
+                  <option value="Simokerto">Simokerto</option>
+                  <option value="Sukolilo">Sukolilo</option>
+                  <option value="Sukomanunggal">Sukomanunggal</option>
+                  <option value="Tambaksari">Tambaksari</option>
+                  <option value="Tandes">Tandes</option>
+                  <option value="Tegalsari">Tegalsari</option>
+                  <option value="Tenggilis Mejoyo">Tenggilis Mejoyo</option>
+                  <option value="Wiyung">Wiyung</option>
+                  <option value="Wonocolo">Wonocolo</option>
+                  <option value="Wonokromo">Wonokromo</option>
+                </select>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <select class="form-select" id="edit_desa" name="desa_kejadian" required>
+                  <option value="" selected disabled>Ketik Lokasi Kejadian (Desa) *</option>
+                  <option value="Asemrowo">Asemrowo</option>
+                  <option value="Genting Kalianak">Genting Kalianak</option>
+                  <option value="Tambak Sarioso">Tambak Sarioso</option>
+                  <option value="Kandangan">Kandangan</option>
+                  <option value="Romokalisari">Romokalisari</option>
+                  <option value="Sememi">Sememi</option>
+                  <option value="Tambak Osowilangun">Tambak Osowilangun</option>
+                  <option value="Alun-Alun Contong">Alun-Alun Contong</option>
+                  <option value="Bubutan">Bubutan</option>
+                  <option value="Gundih">Gundih</option>
+                  <option value="Jepara">Jepara</option>
+                  <option value="Tembok Dukuh">Tembok Dukuh</option>
+                  <option value="Bulak">Bulak</option>
+                  <option value="Kedungcowek">Kedungcowek</option>
+                  <option value="Kenjeran">Kenjeran</option>
+                  <option value="Sukolilo Baru">Sukolilo Baru</option>
+                  <option value="Dukuh Kupang">Dukuh Kupang</option>
+                  <option value="Dukuh Pakis">Dukuh Pakis</option>
+                  <option value="Gunung Sari">Gunung Sari</option>
+                  <option value="Pradah Kalikendal">Pradah Kalikendal</option>
+                  <option value="Dukuh Menanggal">Dukuh Menanggal</option>
+                  <option value="Gayungan">Gayungan</option>
+                  <option value="Ketintang">Ketintang</option>
+                  <option value="Menanggal">Menanggal</option>
+                  <option value="Embong Kaliasin">Embong Kaliasin</option>
+                  <option value="Genteng">Genteng</option>
+                  <option value="Kapasari">Kapasari</option>
+                  <option value="Ketabang">Ketabang</option>
+                  <option value="Peneleh">Peneleh</option>
+                  <option value="Airlangga">Airlangga</option>
+                  <option value="Barata Jaya">Barata Jaya</option>
+                  <option value="Gubeng">Gubeng</option>
+                  <option value="Kertajaya">Kertajaya</option>
+                  <option value="Mojo">Mojo</option>
+                  <option value="Pucangsewu">Pucangsewu</option>
+                  <option value="Gunung Anyar">Gunung Anyar</Gunung Anyar>
+                  <option value="Gunung Anyar Tambak">Gunung Anyar Tambak</option>
+                  <option value="Rungkut Menanggal">Rungkut Menanggal</option>
+                  <option value="Rungkut Tengah">Rungkut Tengah</option>
+                  <option value="Jambangan">Jambangan</option>
+                  <option value="Karah">Karah</option>
+                  <option value="Kebonsari">Kebonsari</option>
+                  <option value="Pagesangan">Pagesangan</option>
+                  <option value="Karang Pilang">Karang Pilang</option>
+                  <option value="Kebraon">Kebraon</option>
+                  <option value="Kedurus">Kedurus</option>
+                  <option value="Warugunung">Warugunung</option>
+                  <option value="Bulakbanteng">Bulakbanteng</option>
+                  <option value="Tambakwedi">Tambakwedi</option>
+                  <option value="Tanah Kalikedinding">Tanah Kalikedinding</option>
+                  <option value="Sidotopo Wetan">Sidotopo Wetan</option>
+                  <option value="Dupak">Dupak</option>
+                  <option value="Kemayoran">Kemayoran</option>
+                  <option value="Krembangan Selatan">Krembangan Selatan</option>
+                  <option value="Morokrembangan">Morokrembangan</option>
+                  <option value="Perak Barat">Perak Barat</option>
+                  <option value="Bangkingan">Bangkingan</option>
+                  <option value="Jeruk">Jeruk</option>
+                  <option value="Lakarsantri">Lakarsantri</option>
+                  <option value="Lidah Kulon">Lidah Kulon</option>
+                  <option value="Lidah Wetan">Lidah Wetan</option>
+                  <option value="Sumur Welut">Sumur Welut</option>
+                  <option value="Dukuh Sutorejo">Dukuh Sutorejo</option>
+                  <option value="Kalijudan">Kalijudan</option>
+                  <option value="Kalisari">Kalisari</option>
+                  <option value="Kejawan Putih Tambak">Kejawan Putih Tambak</option>
+                  <option value="Manyar Sabrangan">Manyar Sabrangan</option>
+                  <option value="Mulyorejo">Mulyorejo</option>
+                  <option value="Bongkaran">Bongkaran</option>
+                  <option value="Krembangan Utara">Krembangan Utara</option>
+                  <option value="Nyamplungan">Nyamplungan</option>
+                  <option value="Tanjung Perak">Tanjung Perak</option>
+                  <option value="Babat Jerawat">Babat Jerawat</option>
+                  <option value="Benowo">Benowo</option>
+                  <option value="Pakal">Pakal</option>
+                  <option value="Sumberejo">Sumberejo</option>
+                  <option value="Kali Rungkut">Kali Rungkut</option>
+                  <option value="Kedung Baruk">Kedung Baruk</option>
+                  <option value="Medokan Ayu">Medokan Ayu</option>
+                  <option value="Penjaringan Sari">Penjaringan Sari</option>
+                  <option value="Rungkut Kidul">Rungkut Kidul</option>
+                  <option value="Wonorejo">Wonorejo</option>
+                  <option value="Bringin">Bringin</option>
+                  <option value="Made">Made</option>
+                  <option value="Lontar">Lontar</option>
+                  <option value="Sambikerep">Sambikerep</option>
+                  <option value="Banyu Urip">Banyu Urip</option>
+                  <option value="Kupang Krajan">Kupang Krajan</option>
+                  <option value="Pakis">Pakis</option>
+                  <option value="Patemon">Patemon</option>
+                  <option value="Putat Jaya">Putat Jaya</option>
+                  <option value="Sawahan">Sawahan</option>
+                  <option value="Ampel">Ampel</option>
+                  <option value="Pegirian">Pegirian</option>
+                  <option value="Sidotopo">Sidotopo</option>
+                  <option value="Ujung">Ujung</option>
+                  <option value="Wonokusumo">Wonokusumo</option>
+                  <option value="Kapasan">Kapasan</option>
+                  <option value="Sidodadi">Sidodadi</option>
+                  <option value="Simokerto">Simokerto</option>
+                  <option value="Simolawang">Simolawang</option>
+                  <option value="Tambakrejo">Tambakrejo</option>
+                  <option value="Gebang Putih">Gebang Putih</option>
+                  <option value="Keputih">Keputih</option>
+                  <option value="Klampisngasem">Klampisngasem</option>
+                  <option value="Medokan Semampir">Medokan Semampir</option>
+                  <option value="Menur Pumpungan">Menur Pumpungan</option>
+                  <option value="Nginden Jangkungan">Nginden Jangkungan</option>
+                  <option value="Semolowaru">Semolowaru</option>
+                  <option value="Putatgede">Putatgede</option>
+                  <option value="Simomulyo">Simomulyo</option>
+                  <option value="Simomulyo Baru">Simomulyo Baru</option>
+                  <option value="Sonokwijenan">Sonokwijenan</option>
+                  <option value="Sukomanunggal">Sukomanunggal</option>
+                  <option value="Tanjungsari">Tanjungsari</option>
+                  <option value="Dukuh Setro">Dukuh Setro</option>
+                  <option value="Gading">Gading</option>
+                  <option value="Kapas Madya">Kapas Madya</option>
+                  <option value="Pacar Kembang">Pacar Kembang</option>
+                  <option value="Pacar Keling">Pacar Keling</option>
+                  <option value="Ploso">Ploso</option>
+                  <option value="Rangkah">Rangkah</option>
+                  <option value="Tambaksari">Tambaksari</option>
+                  <option value="Balongsari">Balongsari</option>
+                  <option value="Banjar Sugihan">Banjar Sugihan</option>
+                  <option value="Karang Poh">Karang Poh</option>
+                  <option value="Manukan Kulon">Manukan Kulon</option>
+                  <option value="Manukan Wetan">Manukan Wetan</option>
+                  <option value="Tandes">Tandes</option>
+                  <option value="Dr. Sutomo">Dr. Sutomo</option>
+                  <option value="Kedungdoro">Kedungdoro</option>
+                  <option value="Keputran">Keputran</option>
+                  <option value="Tegalsari">Tegalsari</option>
+                  <option value="Wonorejo">Wonorejo</option>
+                  <option value="Kendangsari">Kendangsari</option>
+                  <option value="Kutisari">Kutisari</option>
+                  <option value="Panjang Jiwo">Panjang Jiwo</option>
+                  <option value="Tenggilis Mejoyo">Tenggilis Mejoyo</option>
+                  <option value="Babatan">Babatan</option>
+                  <option value="Balasklumprik">Balasklumprik</option>
+                  <option value="Jajar Tunggal">Jajar Tunggal</option>
+                  <option value="Wiyung">Wiyung</option>
+                  <option value="Bendul Merisi">Bendul Merisi</option>
+                  <option value="Jemur Wonosari">Jemur Wonosari</option>
+                  <option value="Margorejo">Margorejo</option>
+                  <option value="Sidosermo">Sidosermo</option>
+                  <option value="Siwalan Kerto">Siwalan Kerto</option>
+                  <option value="Darmo">Darmo</option>
+                  <option value="Jagir">Jagir</option>
+                  <option value="Ngagel">Ngagel</option>
+                  <option value="Ngagelrejo">Ngagelrejo</option>
+                  <option value="Sawunggaling">Sawunggaling</option>
+                  <option value="Wonokromo">Wonokromo</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <input type="text" class="form-control" id="edit_latitude" name="latitude"
+                  placeholder="Ketik Koordinat Latitude (contoh: -7.792382) *" required>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <input type="text" class="form-control" id="edit_longitude" name="longitude"
+                  placeholder="Ketik Koordinat Longitude (contoh: 110.349343) *" required>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <textarea class="form-control" rows="5" id="edit_detail_aduan" name="detail_aduan"
+                placeholder="Ketik Isi Laporan Anda (Opsional)"></textarea>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center mt-4 row">
+              <div class="col-lg-12">
+                <div class="submit-section">
+                  <button type="button" class="btn btn-danger w-100" id="updateData">Perbarui Data</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <!-- Modal for Edit data End -->
+
 
   <!-- JavaScript Libraries -->
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -240,11 +532,33 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
+  <!-- Icon Marker -->
+  <script src="../src/js/leaflet.awesome-markers.js"></script>
+  <script src="../src/js/leaflet.awesome-markers.min.js"></script>
+
+  <!-- Leaflet Plugin -->
+  <script src="../src/lib/leaflet.browser.print-master/dist/leaflet.browser.print.js"></script>
+  <script src="../src/lib/leaflet.browser.print-master/dist/leaflet.browser.print.min.js"></script>
+  <script src="../src/lib/leaflet-search-master/dist/leaflet-search.min.js"></script>
+  <script src="../src/lib/leaflet.defaultextent-master/dist/leaflet.defaultextent.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/gokertanrisever/leaflet-ruler@master/src/leaflet-ruler.js"
+    integrity="sha384-8SqKZR7V8uOetpjjbcNJHvwuHpb074WS0UXjCLhzfJUqYn3B/uWx1WVv5mwRp1mV"
+    crossorigin="anonymous"></script>
+
   <!-- Template Javascript -->
   <script src="../src/js/main.js"></script>
 
   <!-- AJAX -->
   <script>
+    // Function to mask the name
+    function maskName(name) {
+      // Split the name into words
+      const words = name.split(' ');
+      // Map each word to its masked version
+      return words.map(word => word.charAt(0) + '*'.repeat(word.length - 1)).join(' ');
+    }
+
+
     $(document).ready(function () {
       // Fungsi untuk load data
       function loadData() {
@@ -267,32 +581,26 @@
                   .replace(/'/g, "&#039;");
               };
 
-              tableContent += `
-                            <tr>
-                                <td class="text-center">${no++}</td>
-                                <td>${escapeHtml(row.nama_pelapor)}</td>
-                                <td>${escapeHtml(row.jenis_kekerasan)}</td>
-                                <td>${escapeHtml(row.tgl_kejadian)}</td>
-                                <td>${escapeHtml(row.kecamatan_kejadian)}</td>
-                                <td>${escapeHtml(row.desa_kejadian)}</td>
-                                <td>${escapeHtml(row.latitude)}</td>
-                                <td>${escapeHtml(row.longitude)}</td>
-                                <td class="text-center table-actions">
-                                    <button class="btn btn-warning btn-sm" onclick="editData(${row.id})">Edit</button>
-                                    <button class="btn btn-danger btn-sm" onclick="deleteData(${row.id})">Hapus</button>
-                                </td>
-                            </tr>
-                        `;
+              // Mask the name
+              const maskedName = maskName(row.nama_pelapor);
 
-              // Tambahkan marker ke peta
-              L.marker([row.latitude, row.longitude])
-                .addTo(map)
-                .bindPopup(`
-                                <strong>Nama Pelapor:</strong> ${escapeHtml(row.nama_pelapor)}<br>
-                                <strong>Jenis Kekerasan:</strong> ${escapeHtml(row.jenis_kekerasan)}<br>
-                                <strong>Tanggal:</strong> ${escapeHtml(row.tgl_kejadian)}<br>
-                                <strong>Lokasi:</strong> ${escapeHtml(row.desa_kejadian)}, ${escapeHtml(row.kecamatan_kejadian)}
-                            `);
+              tableContent += `
+                              <tr>
+                                  <td class="text-center">${escapeHtml(row.id_laporan)}</td>
+                                  <td>${maskedName}</td>
+                                  <td>${escapeHtml(row.jenis_kekerasan)}</td>
+                                  <td>${escapeHtml(row.tgl_kejadian)}</td>
+                                  <td>${escapeHtml(row.kecamatan_kejadian)}</td>
+                                  <td>${escapeHtml(row.desa_kejadian)}</td>
+                                  <td>${escapeHtml(row.latitude)}</td>
+                                  <td>${escapeHtml(row.longitude)}</td>
+                                  <td class="text-center table-actions">
+                                      <button class="btn btn-warning btn-sm" onclick="editData(${row.id_laporan})">Edit</button>
+                                      <button class="btn btn-danger btn-sm" onclick="deleteData(${row.id_laporan})">Hapus</button>
+                                  </td>
+                              </tr>
+                          `;
+
             });
 
             if (data.length === 0) {
@@ -320,12 +628,85 @@
 
       // Fungsi untuk edit data
       window.editData = function (id) {
-        Swal.fire({
-          title: 'Edit Data',
-          text: 'Fitur edit akan segera tersedia',
-          icon: 'info'
+        // Show spinner
+        $('#spinner').addClass('show');
+
+        // Fetch data for the selected record
+        $.ajax({
+          url: 'get-single-data.php',
+          method: 'GET',
+          data: { id_laporan: id },
+          dataType: 'json',
+          success: function (data) {
+            // Populate the form fields
+            $('#edit_id_laporan').val(data.id_laporan);
+            $('#edit_nama_pelapor').val(data.nama_pelapor);
+            $('#edit_jenis_kekerasan').val(data.jenis_kekerasan);
+            $('#edit_tgl_kejadian').val(data.tgl_kejadian);
+            $('#edit_kecamatan').val(data.kecamatan_kejadian);
+            $('#edit_desa').val(data.desa_kejadian);
+            $('#edit_latitude').val(data.latitude);
+            $('#edit_longitude').val(data.longitude);
+
+            // Hide spinner and show modal
+            $('#spinner').removeClass('show');
+            $('#editModal').modal('show');
+          },
+          error: function (xhr, status, error) {
+            $('#spinner').removeClass('show');
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'Gagal mengambil data untuk diedit'
+            });
+          }
         });
-      }
+      };
+
+      // Handle form submission
+      $('#updateData').click(function () {
+        // Show spinner
+        $('#spinner').addClass('show');
+
+        // Get form data
+        var formData = $('#editForm').serialize();
+
+        // Send AJAX request
+        $.ajax({
+          url: 'update-data.php', // Ensure this URL is correct
+          method: 'POST',
+          data: formData,
+          dataType: 'json',
+          success: function (response) {
+            $('#spinner').removeClass('show');
+            if (response.success) {
+              // Close modal
+              $('#editModal').modal('hide');
+
+              // Set success status in localStorage
+              localStorage.setItem('updateSuccess', 'true');
+
+              // Reload the page
+              location.reload();
+            } else {
+              Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: response.error || 'Gagal memperbarui data'
+              });
+            }
+          },
+          error: function (xhr, status, error) {
+            $('#spinner').removeClass('show');
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'Gagal memperbarui data'
+            });
+          }
+        });
+      });
+
 
       // Fungsi untuk delete data
       window.deleteData = function (id) {
@@ -341,27 +722,52 @@
         }).then((result) => {
           if (result.isConfirmed) {
             $.ajax({
-              url: 'delete_data.php',
+              url: 'delete-data.php',
               method: 'POST',
-              data: { id: id },
+              data: { id_laporan: id },
+              dataType: 'json',
               success: function (response) {
-                Swal.fire(
-                  'Terhapus!',
-                  'Data berhasil dihapus.',
-                  'success'
-                );
-                loadData(); // Reload data setelah menghapus
+                if (response.success) {
+                  Swal.fire(
+                    'Terhapus!',
+                    'Data berhasil dihapus.',
+                    'success'
+                  );
+                  loadData(); // Reload data setelah menghapus
+                } else {
+                  Swal.fire(
+                    'Error!',
+                    response.error || 'Gagal menghapus data.',
+                    'error'
+                  );
+                }
               },
               error: function (xhr, status, error) {
                 console.error('Error:', error);
                 Swal.fire(
                   'Error!',
-                  'Gagal menghapus data.',
+                  'Gagal menghapus data. Silakan coba lagi.',
                   'error'
                 );
               }
             });
           }
+        });
+      }
+    });
+
+    // Check for success status in localStorage
+    $(document).ready(function () {
+      // Check if the updateSuccess flag is set
+      if (localStorage.getItem('updateSuccess')) {
+        // Show the success alert
+        Swal.fire({
+          icon: 'success',
+          title: 'Berhasil',
+          text: 'Data berhasil diperbarui'
+        }).then(() => {
+          // Remove the success status from localStorage after the alert is closed
+          localStorage.removeItem('updateSuccess');
         });
       }
     });
@@ -380,8 +786,8 @@
     });
 
     // Add to HTML
-    // googleStreets.addTo(map);
-    osm.addTo(map);
+    googleStreets.addTo(map);
+    // osm.addTo(map);
 
     // Watermark
     L.Control.Watermark = L.Control.extend({
@@ -410,11 +816,171 @@
       transparent: true,
       attribution: "Batas Administrasi Desa",
       pane: "paneBatasAdmin",
-      opacity: 0.20
+      opacity: 0.20,
     });
 
     batasAdmin.addTo(map);
 
+
+    // Data Titik dari database
+    map.createPane('paneTitikAduan');
+    map.getPane('paneTitikAduan').style.zIndex = 202;
+
+    var markerReportPoint = L.AwesomeMarkers.icon({
+      icon: 'triangle-exclamation',
+      prefix: 'fa',
+      markerColor: 'red',
+      iconColor: 'white',
+    });
+
+    // Mengambil data dari GeoServer menggunakan WFS
+    var geoserver_wfs_url = 'http://localhost:8080/geoserver/wfs';
+
+    // Buat parameter WFS request
+    var parameters = {
+      service: 'WFS',
+      version: '1.0.0',
+      request: 'GetFeature',
+      typeName: 'shield-server:data_aduan',
+      outputFormat: 'application/json',
+      srsName: 'EPSG:4326'
+    };
+
+    // Gabungkan URL dan parameter
+    var url = geoserver_wfs_url + L.Util.getParamString(parameters);
+
+    var titikAduan = L.tileLayer.wms(geoserver_url, {
+      layers: '	shield-server:data_aduan',
+      format: 'image/png',
+      transparent: true,
+      attribution: "Titik Sebaran Aduan Kasus Kekerasan",
+      pane: "paneTitikAduan",
+    });
+
+
+    // Fetch data menggunakan AJAX
+    $.ajax({
+      url: url,
+      dataType: 'json',
+      success: function (data) {
+        // Buat layer GeoJSON dengan custom marker
+        var titikAduan = L.geoJSON(data, {
+          pointToLayer: function (feature, latlng) {
+            return L.marker(latlng, { icon: markerReportPoint });
+          },
+          onEachFeature: function (feature, layer) {
+            // Tambahkan popup jika diperlukan
+            var tgl_kejadian = feature.properties.tgl_kejadian.replace("Z", " "); 
+            if (feature.properties) {
+              layer.bindPopup(
+                "<b  style='font-size: 14px;'>Detail Informasi: </b><br><hr>" +
+                "<b>Nama Pelapor         : </b>" + feature.properties.nama_pelapor +
+                "<br><b>Jenis Kekerasan  : </b>" + feature.properties.jenis_kekerasan +
+                "<br><b>Tanggal Kejadian : </b>" + tgl_kejadian +
+                "<br><b>Lokasi Kejadian  : </b>" + "Desa " + feature.properties.desa_kejadian + " Kec. " + feature.properties.kecamatan_kejadian
+              );
+            }
+          }
+        });
+
+        titikAduan.addTo(map);
+      }
+    });
+
+    // Judul
+    var info = L.control();
+
+    info.onAdd = function (map) {
+      this._div = L.DomUtil.create('div', 'info-title');
+      this.update();
+      return this._div;
+    };
+
+    info.update = function (props) {
+      this._div.innerHTML = '<h5>Sebaran Titik kasus kekerasan<br>berdasarkan laporan</h5>';
+    };
+
+    info.addTo(map);
+
+    // Legenda
+    function createLegend() {
+      var legend = L.control({ position: 'bottomright' });
+
+      legend.onAdd = function (map) {
+        var div = L.DomUtil.create('div', 'info-title');
+        div.innerHTML = '<h5>Legenda</h5>';
+        div.innerHTML += '<img src="../src/img/icon-kasus-kekerasan.png" style="width: 30px; height: 30px; margin-right: 5px; vertical-align: middle;"> Kasus Kekerasan<br>';
+        return div;
+      };
+
+      legend.addTo(map);
+    }
+
+    createLegend();
+
+    // Plugin Leaflet
+    // Layer Control
+    var baseMaps = {
+      "OpenStreetMap": osm,
+      "Google Street": googleStreets
+    };
+
+    var overlayMaps = {
+      "Batas Admin": batasAdmin,
+    };
+
+    L.control.layers(baseMaps, overlayMaps).addTo(map);
+
+    // Search Control
+    var searchControl = new L.Control.Search({
+      layer: batasAdmin,
+      propertyName: 'NAMOBJ',
+      marker: false,
+      moveToLocation: function (latlng, title, map) {
+        map.setView(latlng, 14);
+      }
+    });
+    map.addControl(searchControl);
+
+    // Default Extent Control
+    L.control.defaultExtent().addTo(map);
+
+    // Print
+    var options = {
+      title: "Print Map",
+      documentTitle: "Map",
+      position: 'topleft',
+      closePopupsOnPrint: true,
+      printModes: ["Portrait", "Landscape", "Custom"]
+    };
+
+    var browserControl = L.control.browserPrint(options).addTo(map);
+
+    // Measure 
+    var options = {
+      position: 'topleft',
+      circleMarker: {
+        color: 'red',
+        radius: 2
+      },
+      lineStyle: {
+        color: 'red',
+        dashArray: '1,6'
+      },
+      lengthUnit: {
+        display: 'km',
+        decimal: 2,
+        factor: null,
+        label: 'Distance:'
+      },
+      angleUnit: {
+        display: '&deg;',
+        decimal: 2,
+        factor: null,
+        label: 'Bearing:'
+      }
+    };
+    L.control.ruler(options).addTo(map);
 
   </script>
 </body>

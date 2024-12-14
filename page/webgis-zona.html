@@ -39,11 +39,37 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 
+  <!-- Plugin -->
+  <link rel="stylesheet" href="../src/lib/leaflet.draw-develop/src/leaflet.draw.css">
+  <link rel="stylesheet" href="../src/lib/leaflet.measurecontrol-master/leaflet.measurecontrol.css">
+  <link rel="stylesheet" href="../src/lib/leaflet-search-master/dist/leaflet-search.min.css">
+  <link rel="stylesheet" href="../src/lib/Leaflet.defaultextent-master/dist/leaflet.defaultextent.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/gokertanrisever/leaflet-ruler@master/src/leaflet-ruler.css"
+    integrity="sha384-P9DABSdtEY/XDbEInD3q+PlL+BjqPCXGcF8EkhtKSfSTr/dS5PBKa9+/PMkW2xsY" crossorigin="anonymous" />
+
   <!-- Customized Bootstrap Stylesheet -->
   <link href="../src/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- External CSS -->
   <link href="../src/css/style.css" rel="stylesheet">
+
+  <!-- Internal CSS -->
+  <style>
+    .info-title {
+      padding: 6px 8px;
+      font: 14px/16px Arial, Helvetica, sans-serif;
+      background: white;
+      background: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      border-radius: 5px;
+    }
+
+    .info-title h4 {
+      margin: 0;
+      padding: 5px;
+      color: #D81324;
+    }
+  </style>
 
 </head>
 
@@ -113,6 +139,14 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
+  <!-- Leaflet Plugin -->
+  <script src="../src/lib/leaflet.browser.print-master/dist/leaflet.browser.print.js"></script>
+  <script src="../src/lib/leaflet.browser.print-master/dist/leaflet.browser.print.min.js"></script>
+  <script src="../src/lib/leaflet-search-master/dist/leaflet-search.min.js"></script>
+  <script src="../src/lib/leaflet.defaultextent-master/dist/leaflet.defaultextent.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/gokertanrisever/leaflet-ruler@master/src/leaflet-ruler.js"
+    integrity="sha384-8SqKZR7V8uOetpjjbcNJHvwuHpb074WS0UXjCLhzfJUqYn3B/uWx1WVv5mwRp1mV"
+    crossorigin="anonymous"></script>
 
   <!-- Template Javascript -->
   <script src="../src/js/main.js"></script>
@@ -129,9 +163,7 @@
       subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
     });
 
-    // Add to HTML
-    // googleStreets.addTo(map);
-    osm.addTo(map);
+    googleStreets.addTo(map);
 
     // Watermark
     L.Control.Watermark = L.Control.extend({
@@ -164,7 +196,183 @@
     });
 
     batasAdmin.addTo(map);
-    
+
+
+    map.createPane('paneBatasDesaGaris');
+    map.getPane('paneBatasDesaGaris').style.zIndex = 301;
+
+    var batasDesaGaris = L.tileLayer.wms(geoserver_url, {
+      layers: 'shield-server:BatasAdminDesaKotaSurabaya_Garis',
+      format: 'image/png',
+      transparent: true,
+      attribution: "Batas Administrasi Desa Garis",
+      pane: "paneBatasDesaGaris",
+      opacity: 0.40
+    });
+
+    batasDesaGaris.addTo(map);
+
+
+    // Layer titik Zona Kasus Kekerasan
+    // Ambil data dari GeoServer menggunakan WFS
+    var geoserver_wfs_url = 'http://localhost:8080/geoserver/wfs';
+
+    // Buat parameter WFS request
+    var parameters = {
+      service: 'WFS',
+      version: '1.0.0',
+      request: 'GetFeature',
+      typeName: 'shield-server:data_zona', // Ganti dengan nama layer Anda
+      outputFormat: 'application/json',
+      srsName: 'EPSG:4326'
+    };
+
+    // Gabungkan URL dan parameter
+    var url = geoserver_wfs_url + L.Util.getParamString(parameters);
+
+    // Fetch data menggunakan AJAX
+    $.ajax({
+      url: url,
+      dataType: 'json',
+      success: function (data) {
+        /// Buat layer GeoJSON dengan radius statis
+        data.features.forEach(function (feature) {
+          var latlng = L.latLng(feature.geometry.coordinates[1], feature.geometry.coordinates[0]);
+          var radius = 500; // Radius dalam meter
+
+          // Buat lingkaran dengan radius statis
+          L.circle(latlng, {
+                radius: radius,
+                color: 'red',
+                fillColor: 'red',
+                fillOpacity: 0.3,
+                weight: 1
+            }).addTo(map).bindTooltip("Tanggal Kejadian: " + feature.properties.tgl_kejadian + "<br>Jenis Kekerasan: " + feature.properties.jenis_kekerasan).addTo(map);
+
+            // Detail Titik
+            // L.circleMarker(latlng, {
+            //     radius: 5, // Ukuran titik
+            //     color: 'red',
+            //     fillColor: 'red',
+            //     fillOpacity: 1,
+            //     weight: 1
+            // }).addTo(map);
+
+        
+        });
+
+      },
+      error: function (xhr, status, error) {
+        console.error('Error fetching data:', error);
+      }
+    });
+
+
+
+    // Judul
+    var info = L.control();
+
+    info.onAdd = function (map) {
+      this._div = L.DomUtil.create('div', 'info-title');
+      this.update();
+      return this._div;
+    };
+
+    info.update = function (props) {
+      this._div.innerHTML = '<h4>Peta Zona Rawan Kasus Kekerasan di Kota<br>Surabaya Tahun 2024</h4>';
+    };
+
+    info.addTo(map);
+
+    // Legenda
+    function createLegend() {
+      var legend = L.control({ position: 'bottomright' });
+
+      legend.onAdd = function (map) {
+        var div = L.DomUtil.create('div', 'info-title');
+        div.innerHTML = '<h5>Legenda</h5>';
+        div.innerHTML += '<div style="display: flex; align-items: center;">' +
+          '<div style="border: 2px dashed #B65113; width: 40px; height: 0;"></div>' +
+          '<span style="margin-left: 20px;">Batas Desa</span>' +
+          '</div>';
+        return div;
+      };
+
+      legend.addTo(map);
+    }
+
+    createLegend();
+
+    // Plugin 
+
+    // Layer Control
+    var baseMaps = {
+      "OpenStreetMap": osm,
+      "Google Street": googleStreets
+    };
+
+    var overlayMaps = {
+      "Batas Admin": batasAdmin,
+    };
+
+    L.control.layers(baseMaps, overlayMaps).addTo(map);
+
+    // Search Control
+    var searchControl = new L.Control.Search({
+      layer: batasAdmin,
+      propertyName: 'NAMOBJ',
+      marker: false,
+      moveToLocation: function (latlng, title, map) {
+        console.log("Found location:", title);
+        map.setView(latlng, 14);
+      },
+      autoComplete: true,
+      autoCompleteDelay: 250
+    });
+    map.addControl(searchControl);
+
+    // Default Extent Control
+    L.control.defaultExtent().addTo(map);
+
+    // Print
+    var options = {
+      title: "Print Map",
+      documentTitle: "Map",
+      position: 'topleft',
+      closePopupsOnPrint: true,
+      printModes: ["Portrait", "Landscape", "Custom"]
+    };
+
+    var browserControl = L.control.browserPrint(options).addTo(map);
+
+    // Measure 
+    var options = {
+      position: 'topleft',
+      circleMarker: {
+        color: 'red',
+        radius: 2
+      },
+      lineStyle: {
+        color: 'red',
+        dashArray: '1,6'
+      },
+      lengthUnit: {
+        display: 'km',
+        decimal: 2,
+        factor: null,
+        label: 'Distance:'
+      },
+      angleUnit: {
+        display: '&deg;',
+        decimal: 2,
+        factor: null,
+        label: 'Bearing:'
+      }
+    };
+
+    L.control.ruler(options).addTo(map);
+
+
   </script>
 
 </body>

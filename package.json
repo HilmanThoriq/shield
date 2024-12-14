@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "leaflet.measurecontrol": "^1.1.0"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "test": "jest",
+    "build": "webpack --mode production",
+    "release": "npm run build"
+  }
+}
