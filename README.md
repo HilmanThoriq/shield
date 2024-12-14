@@ -38,21 +38,34 @@ Surabaya, sebagai kota metropolitan yang dinamis, sayangnya juga menjadi sorotan
 * **MySQL :** 
 
 ### Plugin Leaflet
-* **Leaflet Icon Pulse :** Menambahkan ikon berdenyut ke peta untuk menyoroti lokasi tertentu.
-* **Pencarian Leaflet :** Memungkinkan pencarian lokasi dan penanda pada peta.
-* **Luas Default Leaflet :** Mengatur tingkat zoom awal dan koordinat tengah peta.
-* **Leaflet Browser Print :** Memungkinkan pengguna mencetak tampilan peta saat ini dengan mudah.
-* **Penggaris Leaflet :** Memungkinkan pengukuran jarak dan area pada peta.
+* **Leaflet Icon Pulse :** 
+* **Pencarian Leaflet :** 
+* **Luas Default Leaflet :** 
+* **Leaflet Browser Print :** 
+* **Penggaris Leaflet :** 
+
+
+## Sumber Data 
+
+* **Data Shapefile :** LapakGIS dan InaGeoportal
+* **Data Gambar  :** Gambar dari Google, Gambar Background dari website LAPOR
+* **Data Kasus Kekerasan :** Website Simfoni PPA dan beberapa dari Berita yang beredar
 
 
 ## Fitur SHIELD
 - **Landing Page :** Halaman Awal yang menarik dan inovatif untuk menyambut pengguna.
-![]()
+![Landing Page](src/img/images-readme/shield_landingpage.jpeg)
 - **Dashboard :** Infografis visualisasi data terkait data statistik kasus kekerasan.
-![]()
+![Dashboard](src/img/images-readme/shield_dashboard.jpeg)
 - **WebGIS :** Peta interaktif untuk visualisasi data geografis dan analisis spasial terkait kasus kekerasan.
-![]()
+
+<div style="display: flex; justify-content: space-around;">
+  <img src="src/img/images-readme/shield_webgis-sebarankasus.png" alt="WebGIS Sebaran Kasus Kekerasan" width="200"/>
+  <img src="src/img/images-readme/shield_webgis-zonarawankekerasan.png" alt="WebGIS Zona Rawan Kasus Kekerasan" width="200"/>
+  <img src="src/img/images-readme/shield_webgis-kasusbykec.png" alt="WebGIS Jumlah Kasus Kekerasan per Kecamatan" width="200"/>
+</div>
+
 - **Buat Aduan :** Formulir online untuk melaporkan kejadian kasus kekerasan saat melihat atau mengalami.
-![]()
+![Buat Formulir](src/img/images-readme/shield_buat-aduan.jpeg)
 - **Riwayat :** Informasi berupa tabel dan peta mengenai riwayat laporan yang dilaporkan pengguna melalui website.
-![]()
+![Riwayat Aduan](src/img/images-readme/shield_riwayat-aduan.jpeg)
