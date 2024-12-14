@@ -54,10 +54,10 @@ Surabaya, sebagai kota metropolitan yang dinamis, sayangnya juga menjadi sorotan
 
 ## Fitur SHIELD
 - **Landing Page :** Halaman Awal yang menarik dan inovatif untuk menyambut pengguna.
-<img src="src/img/images-readme/shield_landing-page.jpeg" alt="Landing Page" width="600"/>
+<img src="src/img/images-readme/shield_landingpage.jpeg" alt="Landing Page" width="600" style="text-align: center"/>
 
 - **Dashboard :** Infografis visualisasi data terkait data statistik kasus kekerasan.
-<img src="src/img/images-readme/shield_dashboard.jpeg" alt="Landing Page" width="600"/>
+<img src="src/img/images-readme/shield_dashboard.jpeg" alt="Dashboard" width="600" style="text-align: center"/>
 
 - **WebGIS :** Peta interaktif untuk visualisasi data geografis dan analisis spasial terkait kasus kekerasan.
 
@@ -68,7 +68,7 @@ Surabaya, sebagai kota metropolitan yang dinamis, sayangnya juga menjadi sorotan
 </div>
 
 - **Buat Aduan :** Formulir online untuk melaporkan kejadian kasus kekerasan saat melihat atau mengalami.
-<img src="src/img/images-readme/shield_buat-aduan.jpeg" alt="Buat Aduan" width="600"/>
+<img src="src/img/images-readme/shield_buat-aduan.jpeg" alt="Buat Aduan" width="600" style="text-align: center"/>
 
 - **Riwayat :** Informasi berupa tabel dan peta mengenai riwayat laporan yang dilaporkan pengguna melalui website.
-<img src="src/img/images-readme/shield_riwayat-aduan.jpeg" alt="Riwayat Aduan" width="600"/>
+<img src="src/img/images-readme/shield_riwayat-aduan.jpeg" alt="Riwayat Aduan" width="600" style="text-align: center"/>
